@@ -32,5 +32,5 @@ filegroup(
 
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
-# gazelle:prefix github.com/google/prog-edu-assistant
+# gazelle:prefix github.com/UTDataMining/prog-edu-assistant
 gazelle(name = "gazelle")
