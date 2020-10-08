@@ -52,7 +52,7 @@ def _assignment_notebook_impl(ctx):
       inputs = [autograder_out],
       outputs = [tar_out],
       progress_message = "Running tar %s" % tarfile,
-      executable = "tar",
+      executable = "/usr/local/opt/gnu-tar/libexec/gnubin/tar",
       # Note: The below requires GNU tar.
       arguments = ["-c", "-f", tar_out.path, "--dereference", "--transform=s/^./autograder/", "-C", autograder_out.path, "."],
   )
@@ -110,7 +110,7 @@ def _autograder_tar_impl(ctx):
       inputs = tar_inputs + ctx.files._static + ctx.files._binary,
       outputs = [tar_out],
       progress_message = "Running tar %s" % tarfile,
-      executable = "tar",
+      executable = "/usr/local/opt/gnu-tar/libexec/gnubin/tar",
       # Note 1: The below requires GNU tar.
       # Note 2: The resulting tar contains zero blocks, so needs -i option when extracting.
       arguments = (["--concatenate", "-f", tar_out.path] +
@@ -177,7 +177,7 @@ def _student_tar_impl(ctx):
 	inputs = notebook_inputs + data_inputs,
 	outputs = [files_tar_out],
 	progress_message = "Running tar %s" % files_tarfile,
-	executable = "tar",
+	executable = "/usr/local/opt/gnu-tar/libexec/gnubin/tar",
 	arguments = (["-c", "-f", files_tar_out.path, "--dereference"] + data_paths + ["-C", prefix] + notebook_paths),
     )
     #print("tar command: /usr/bin/tar --concatenate -f " + tar_out.path + " " + files_tar_out.path + " ".join(tar_paths))
@@ -185,7 +185,7 @@ def _student_tar_impl(ctx):
 	inputs = [files_tar_out] + tar_inputs,
 	outputs = [tar_out],
 	progress_message = "Running tar %s" % tarfile,
-	executable = "tar",
+	executable = "/usr/local/opt/gnu-tar/libexec/gnubin/tar",
 	arguments = (["--concatenate", "-f", tar_out.path, files_tar_out.path] + tar_paths),
     )
   else:
@@ -195,7 +195,7 @@ def _student_tar_impl(ctx):
 	inputs = notebook_inputs + data_inputs,
 	outputs = [tar_out],
 	progress_message = "Running tar %s" % tarfile,
-	executable = "tar",
+	executable = "/usr/local/opt/gnu-tar/libexec/gnubin/tar",
 	arguments = (["-c", "-f", tar_out.path, "--dereference"] + data_paths + ["-C", prefix] + notebook_paths),
     )
   return [DefaultInfo(files = depset(outs))]
