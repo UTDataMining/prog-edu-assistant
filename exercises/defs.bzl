@@ -52,7 +52,7 @@ def _assignment_notebook_impl(ctx):
       inputs = [autograder_out],
       outputs = [tar_out],
       progress_message = "Running tar %s" % tarfile,
-      executable = "tar",
+      executable = "/usr/local/opt/gnu-tar/libexec/gnubin/tar",
       # Note: The below requires GNU tar.
       arguments = ["-c", "-f", tar_out.path, "--dereference", "--transform=s/^./autograder/", "-C", autograder_out.path, "."],
   )
